@@ -3,9 +3,11 @@
 
 
 const process = require('process');
-const chromium = require('chromium');
+// const chromium = require('chromium');
+// process.env.CHROME_BIN = chromium.path;
 
-process.env.CHROME_BIN = chromium.path;
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 
 
 module.exports = function (config) {
@@ -32,9 +34,10 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
+    browsers:['ChromeHeadlessCI'],
     customLaunchers: {
-      ChromeHeadless: {
-        base: 'Chrome',
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
         flags: [
           '--headless',
           '--disable-gpu',
